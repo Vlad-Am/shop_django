@@ -1,0 +1,42 @@
+[
+  {
+    "model": "catalog.categories",
+    "pk": 1,
+    "fields": {
+      "category": "vegetables",
+      "description": "зеленые"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 2,
+    "fields": {
+      "category": "fruit",
+      "description": "yellow"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 3,
+    "fields": {
+      "category": "bakery",
+      "description": "white"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 4,
+    "fields": {
+      "category": "household goods",
+      "description": "black"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 5,
+    "fields": {
+      "category": "Fish",
+      "description": "red"
+    }
+  }
+]
