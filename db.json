@@ -1,0 +1,120 @@
+[
+  {
+    "model": "catalog.categories",
+    "pk": 1,
+    "fields": {
+      "category": "vegetables",
+      "description": "зеленые"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 2,
+    "fields": {
+      "category": "fruit",
+      "description": "yellow"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 3,
+    "fields": {
+      "category": "bakery",
+      "description": "white"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 4,
+    "fields": {
+      "category": "household goods",
+      "description": "black"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 5,
+    "fields": {
+      "category": "Fish",
+      "description": "red"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 1,
+    "fields": {
+      "name": "Яблоко",
+      "description": "Голден",
+      "preview": "",
+      "category": 2,
+      "price": 59,
+      "created_at": "2024-02-09T12:55:23.457Z",
+      "updated_at": "2024-02-09T12:55:23.457Z"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 2,
+    "fields": {
+      "name": "Багет",
+      "description": "французская вытянутая болочка",
+      "preview": "",
+      "category": 3,
+      "price": 63,
+      "created_at": "2024-02-09T12:56:03.471Z",
+      "updated_at": "2024-02-09T12:56:03.471Z"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 3,
+    "fields": {
+      "name": "Картофель эконом",
+      "description": "не мытый",
+      "preview": "",
+      "category": 1,
+      "price": 30,
+      "created_at": "2024-02-09T12:56:33.203Z",
+      "updated_at": "2024-02-09T12:56:33.203Z"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 4,
+    "fields": {
+      "name": "Швабра",
+      "description": "Палка с тряпкой",
+      "preview": "",
+      "category": 4,
+      "price": 100,
+      "created_at": "2024-02-09T12:56:54.462Z",
+      "updated_at": "2024-02-09T12:56:54.462Z"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 5,
+    "fields": {
+      "name": "Ведро 10л",
+      "description": "глубокое для мытья полов",
+      "preview": "",
+      "category": 4,
+      "price": 150,
+      "created_at": "2024-02-09T13:23:34.200Z",
+      "updated_at": "2024-02-09T13:23:34.200Z"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 6,
+    "fields": {
+      "name": "кочерга",
+      "description": "для кочерыжек в костре",
+      "preview": "",
+      "category": 4,
+      "price": 150,
+      "created_at": "2024-02-09T13:24:15.480Z",
+      "updated_at": "2024-02-09T13:24:15.480Z"
+    }
+  }
+]
