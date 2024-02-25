@@ -21,11 +21,12 @@ class Categories(models.Model):
 class Products(models.Model):
     name = models.CharField(max_length=100, verbose_name="Наименование")
     description = models.CharField(max_length=100, verbose_name="Описание")
-    preview = models.ImageField(upload_to="catalog/", verbose_name="Изображение", **NULLABLE)
-    category = models.ForeignKey(Categories, on_delete=models.DO_NOTHING)
+    preview = models.ImageField(upload_to="media/catalog", verbose_name="Изображение", **NULLABLE)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     price = models.IntegerField(verbose_name="Цена")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления", **NULLABLE)
+
     # manufactured_at = models.DateTimeField(auto_now=True, verbose_name="Дата производства", **NULLABLE)
 
     def __str__(self):
@@ -35,4 +36,37 @@ class Products(models.Model):
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
         ordering = ("price",)
+
+
+class Contacts(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Наименование")
+    phone_number = models.IntegerField(verbose_name="Телефон")
+    message = models.TextField(verbose_name="Сообщение", **NULLABLE)
+
+    def __str__(self):
+        return f"Пользователь с именем: {self.name}\nТелефоном: {self.phone_number}\nПрислал сообщение: {self.message}"
+
+    class Meta:
+        verbose_name = "контакт"
+        verbose_name_plural = "контакты"
+        ordering = ('name',)
+
+
+class Blog(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Заголовок")
+    slug = models.SlugField(max_length=100, verbose_name="slug", **NULLABLE)
+    content = models.TextField(verbose_name="Содержание", **NULLABLE)
+    preview = models.ImageField(upload_to="catalog/blog", verbose_name="Изображение", **NULLABLE)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    published = models.BooleanField(verbose_name="Опубликовано", default=False)
+    view_count = models.IntegerField(default=0, verbose_name="Количество просмотров")
+    price = models.IntegerField(verbose_name="Цена", **NULLABLE)
+
+    def __str__(self):
+        return f"""Публикация с заголовком {self.title}\n создана {self.created_at}\n"""
+
+    class Meta:
+        verbose_name = "публикация"
+        verbose_name_plural = "публикации"
+        ordering = ('created_at', 'view_count',)
 
