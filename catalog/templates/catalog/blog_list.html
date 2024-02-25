@@ -19,7 +19,13 @@
                 </div>
                 <img src='{{ blog.preview | media_filter }}' alt="Product Image" class='img-fluid'>
                 <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{ blog.content}}</h1>
+                    <h1 class="card-title pricing-card-title">
+                        {% if blog.content|length < 100 %}
+                            {{ blog.content}}
+                        {% else %}
+                            {{ blog.content|truncatechars:100 }}
+                        {% endif %}
+                    </h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>- {{ blog.created_at}}</li>
                         <li>- {{ blog.price}} Руб.</li>
