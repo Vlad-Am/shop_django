@@ -1,0 +1,36 @@
+{% extends 'catalog/base.html'%}
+{% load share_media %}
+{% block content %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Skystore</h1>
+    <p class="lead">Skystore - это отличный магазин продуктов по самым низким ценам</p>
+</div>
+<div class="container">
+    <div class="row text-center">
+        {% for product in object_list %}
+        <div class="col-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ product.name| title }}</h4>
+                </div>
+                <img src = '{{ product.preview | media_filter }}' alt="Product Image" class = 'img-fluid'>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{product.price}} ₽</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- {{product.description}}</li>
+                        <li>- {{product.category}}</li>
+                        <li>- Доставка</li>
+                        <li>- Надежный поставщик</li>
+                    </ul>
+                    <a href="{% url 'catalog:view_product' pk=product.pk %}">
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">Посмотреть</button>
+                    </a>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">В корзину</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

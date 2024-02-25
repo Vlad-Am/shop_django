@@ -10,13 +10,13 @@ class Command(BaseCommand):
     @staticmethod
     def json_read_categories():
         """Здесь мы получаем данные из фикстуры с категориями"""
-        with open("db_categories.json", "r", encoding="utf-8") as file:
+        with open("db_categories.json", "r", encoding="windows-1251") as file:
             return json.load(file)
 
     @staticmethod
     def json_read_products():
         # Здесь мы получаем данные из фикстуры с продуктами
-        with open("db_products.json", "r", encoding="utf-8") as file:
+        with open("db_products.json", "r", encoding="windows-1251") as file:
             return json.load(file)
 
     def handle(self, *args, **options):
@@ -43,7 +43,7 @@ class Command(BaseCommand):
         # Обходим все значения продуктов из фиктсуры для получения информации об одном объекте
         for product in Command.json_read_products():
             product_for_create.append(
-                Products(pk=product["pk"], name=product["fields"]["name"], description=product["fields"]["description"],
+                Products(name=product["fields"]["name"], description=product["fields"]["description"],
                          preview=product["fields"]["preview"],
                          # получаем категорию из базы данных для корректной связки объектов
                          category=Categories.objects.get(pk=product["fields"]["category"]),

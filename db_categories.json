@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "category": "vegetables",
-      "description": "Р·РµР»РµРЅС‹Рµ"
+      "description": "зеленые"
     }
   },
   {
@@ -37,6 +37,14 @@
     "fields": {
       "category": "Fish",
       "description": "red"
+    }
+  },
+  {
+    "model": "catalog.categories",
+    "pk": 6,
+    "fields": {
+      "category": "колбасы",
+      "description": "мясные деликатесы"
     }
   }
 ]
