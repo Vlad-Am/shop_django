@@ -41,10 +41,14 @@ class BlogDetailView(DetailView):
         self.object.save()
         return self.object
 
+    slug_url_kwarg = 'the_slug'
+    # Should match the name of the slug field on the model
+    slug_field = 'slug'
+
 
 class BlogCreateView(CreateView):
     model = Blog
-    fields = ("title", "content", "preview", "published", "price")
+    fields = ("title", "content", "preview", "published", "price_per_one")
     success_url = reverse_lazy('catalog:blogs_list')
 
     def form_valid(self, form):
@@ -55,11 +59,18 @@ class BlogCreateView(CreateView):
 
         return super().form_valid(form)
 
+    slug_url_kwarg = 'the_slug'
+    # Should match the name of the slug field on the model
+    slug_field = 'slug'
+
 
 class BlogUpdateView(UpdateView):
     model = Blog
-    fields = ("title", "content", "preview", "published", "price")
+    fields = ("title", "content", "preview", "published", "price_per_one")
     success_url = reverse_lazy('catalog:blogs_list')
+
+    slug_url_kwarg = 'the_slug'
+    slug_field = 'slug'
 
     def form_valid(self, form):
         if form.is_valid():
@@ -71,7 +82,7 @@ class BlogUpdateView(UpdateView):
 
     def get_success_url(self, *args, **kwargs):
         super().get_success_url(*args, **kwargs)
-        return reverse_lazy('catalog:view_blog', kwargs={'pk': self.object.pk})
+        return reverse_lazy('catalog:view_blog', kwargs={'the_slug': self.object.slug})
 
 
 class BlogDeleteView(DeleteView):
