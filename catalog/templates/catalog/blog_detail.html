@@ -17,16 +17,16 @@
                     <h1 class="card-title pricing-card-title">{{ object.content}}</h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>- {{ object.created_at}}</li>
-                        <li>- {{ object.price}} Руб.</li>
+                        <li>- {{ object.price_per_one}} Руб.</li>
                     </ul>
                     <div class="card-footer">
                         Просмотры: {{ object.view_count }}
-                        <a href="{% url 'catalog:update_blog' pk=object.pk %}">
+                        <a href="{% url 'catalog:update_blog' the_slug=blog.slug %}">
                             <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">
                                 Изменить
                             </button>
                         </a>
-                        <a href="{% url 'catalog:delete_blog' pk=object.pk %}">
+                        <a href="{% url 'catalog:delete_blog' the_slug=blog.slug %}">
                             <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">
                                 Удалить
                             </button>

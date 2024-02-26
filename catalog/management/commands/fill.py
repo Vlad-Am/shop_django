@@ -2,7 +2,7 @@ import json
 
 from django.core.management import BaseCommand
 
-from catalog.models import Products, Categories
+from catalog.models import Products, Categories, Blog, Contacts
 
 
 class Command(BaseCommand):
@@ -25,10 +25,16 @@ class Command(BaseCommand):
         Products.objects.all().delete()
         # Удалите все категории
         Categories.objects.all().delete()
+        # Удалите все контакты
+        Contacts.objects.all().delete()
+        # Удалите все записи блогов
+        Blog.objects.all().delete()
 
         # Создайте списки для хранения объектов
         product_for_create = []
         category_for_create = []
+        contacts_for_create = []
+        blog_for_create = []
 
         # Обходим все значения категорий из фиктсуры для получения информации об одном объекте
         for category in Command.json_read_categories():
@@ -53,3 +59,24 @@ class Command(BaseCommand):
 
         # Создаем объекты в базе с помощью метода bulk_create()
         Products.objects.bulk_create(product_for_create)
+
+        # Обходим все значения категорий из фиктсуры для получения информации об одном объекте
+        for contact in Command.json_read_categories():
+            contacts_for_create.append(
+                Contacts(pk=contact["pk"], phone_number=contact["fields"]["phone_number"],
+                         name=contact["fields"]["name"],
+                         message=contact["fields"]["message"])
+            )
+
+        # Создаем объекты в базе с помощью метода bulk_create()
+        Contacts.objects.bulk_create(contacts_for_create)
+
+        for contact in Command.json_read_categories():
+            contacts_for_create.append(
+                Contacts(pk=contact["pk"], phone_number=contact["fields"]["phone_number"],
+                         name=contact["fields"]["name"],
+                         message=contact["fields"]["message"])
+            )
+
+        # Создаем объекты в базе с помощью метода bulk_create()
+        Contacts.objects.bulk_create(contacts_for_create)

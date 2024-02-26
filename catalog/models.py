@@ -1,4 +1,5 @@
 from django.db import models
+from pytils.translit import slugify
 
 # Create your models here.
 
@@ -53,20 +54,25 @@ class Contacts(models.Model):
 
 
 class Blog(models.Model):
+
     title = models.CharField(max_length=100, verbose_name="Заголовок")
-    slug = models.CharField(max_length=100, verbose_name="slug", **NULLABLE)
+    slug = models.SlugField(unique=True, verbose_name="slug", **NULLABLE)
     content = models.TextField(verbose_name="Содержание", **NULLABLE)
     preview = models.ImageField(upload_to="catalog/blog", verbose_name="Изображение", **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     published = models.BooleanField(verbose_name="Опубликовано", default=False)
     view_count = models.IntegerField(default=0, verbose_name="Количество просмотров")
-    price = models.IntegerField(verbose_name="Цена", **NULLABLE)
+    price_per_one = models.FloatField(verbose_name="Цена за штуку", **NULLABLE)
 
     def __str__(self):
         return f"""Публикация с заголовком {self.title}\n создана {self.created_at}\n"""
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name = "публикация"
         verbose_name_plural = "публикации"
-        ordering = ('created_at', 'view_count',)
+        ordering = ('price_per_one', 'created_at', 'view_count',)
 
