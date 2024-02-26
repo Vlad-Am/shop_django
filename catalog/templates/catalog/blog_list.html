@@ -12,38 +12,38 @@
             <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">Создать запись</button>
         </a>
         {% for blog in object_list %}
-        <div class="col-4">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ blog.title| title }}</h4>
-                </div>
-                <img src='{{ blog.preview | media_filter }}' alt="Product Image" class='img-fluid'>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title">
-                        {% if blog.content|length < 100 %}
-                            {{ blog.content}}
-                        {% else %}
-                            {{ blog.content|truncatechars:100 }}
-                        {% endif %}
-                    </h1>
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>- {{ blog.created_at}}</li>
-                        <li>- {{ blog.price}} Руб.</li>
-                    </ul>
-                    <div class="card-footer">
-                        Просмотры: {{ blog.view_count }}
-                        <a href="{% url 'catalog:view_blog' pk=blog.pk %}">
-                            <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">
-                                Посмотреть
+            <div class="col-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{ blog.title| title }}</h4>
+                    </div>
+                    <img src='{{ blog.preview | media_filter }}' alt="Product Image" class='img-fluid'>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">
+                            {% if blog.content|length < 100 %}
+                                {{ blog.content}}
+                            {% else %}
+                                {{ blog.content|truncatechars:100 }}
+                            {% endif %}
+                        </h1>
+                        <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                            <li>- {{ blog.created_at}}</li>
+                            <li>- {{ blog.price}} Руб.</li>
+                        </ul>
+                        <div class="card-footer">
+                            Просмотры: {{ blog.view_count }}
+                            <a href="{% url 'catalog:view_blog' pk=blog.pk %}">
+                                <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">
+                                    Посмотреть
+                                </button>
+                            </a>
+                            <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">В корзину
                             </button>
-                        </a>
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">В корзину
-                        </button>
+                        </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
+        {% endfor %}
     </div>
     {% endblock %}
 </div>

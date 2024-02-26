@@ -61,6 +61,14 @@ class BlogUpdateView(UpdateView):
     fields = ("title", "content", "preview", "published", "price")
     success_url = reverse_lazy('catalog:blogs_list')
 
+    def form_valid(self, form):
+        if form.is_valid():
+            new_blog = form.save()
+            new_blog.slug = slugify(new_blog.title)
+            new_blog.save()
+
+        return super().form_valid(form)
+
     # def get_success_url(self, *args, **kwargs):
     #     super().get_success_url(*args, **kwargs)
     #     return reverse_lazy('catalog:view_blog', kwargs={'slug': self.object.slug})
