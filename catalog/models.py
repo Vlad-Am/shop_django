@@ -54,7 +54,7 @@ class Contacts(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=100, verbose_name="Заголовок")
-    slug = models.SlugField(max_length=100, verbose_name="slug", **NULLABLE)
+    slug = models.CharField(max_length=100, verbose_name="slug", **NULLABLE)
     content = models.TextField(verbose_name="Содержание", **NULLABLE)
     preview = models.ImageField(upload_to="catalog/blog", verbose_name="Изображение", **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
