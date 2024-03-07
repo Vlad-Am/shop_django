@@ -1,11 +1,30 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from pytils.translit import slugify
+
+from catalog.forms import ProductForm
 from catalog.models import Products, Contacts, Blog
 
 
 class ProductListView(ListView):
     model = Products
+
+    def get_context_data(self, *args, **kwargs):
+        """Получает данные о версиях продукта и выберите текущую (активную) версию для продукта"""
+        context = super().get_context_data(*args, **kwargs)
+
+
+        return super().get_context_data(*args, **kwargs)
+
+
+class ProductCreateView(CreateView):
+    model = Products
+    success_url = reverse_lazy('catalog:products_list')
+    form_class = ProductForm
+
+    # def get_success_url(self, *args, **kwargs):
+    #     super().get_success_url(*args, **kwargs)
+    #     return reverse_lazy('catalog:view_product', kwargs={'pk': self.object.pk})
 
 
 class ContactsCreateView(CreateView):

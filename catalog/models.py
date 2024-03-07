@@ -76,3 +76,17 @@ class Blog(models.Model):
         verbose_name_plural = "публикации"
         ordering = ('price_per_one', 'created_at', 'view_count',)
 
+
+class Version(models.Model):
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, max_length=150, verbose_name="Продукт")
+    number = models.IntegerField(default=1,verbose_name="номер версии")
+    name = models.CharField(max_length=150, verbose_name="Название версии")
+    working = models.BooleanField(verbose_name="Работает", default=False)
+
+    def __str__(self):
+        return f" Версия {self.product} номер {self.number}"
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
+        ordering = ('product', 'number', 'name', 'working')
