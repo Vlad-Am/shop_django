@@ -1,0 +1,1 @@
+[{"model": "catalog.contacts", "pk": 1, "fields": {"name": "vlad", "phone_number": 133113, "message": "hi vlad"}}, {"model": "catalog.contacts", "pk": 2, "fields": {"name": "test", "phone_number": 9838, "message": "test"}}]
