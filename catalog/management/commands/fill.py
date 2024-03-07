@@ -19,6 +19,18 @@ class Command(BaseCommand):
         with open("db_products.json", "r", encoding="windows-1251") as file:
             return json.load(file)
 
+    @staticmethod
+    def json_read_contacts():
+        # Здесь мы получаем данные из фикстуры с продуктами
+        with open("db_contacts.json", "r", encoding="windows-1251") as file:
+            return json.load(file)
+
+    @staticmethod
+    def json_read_blogs():
+        # Здесь мы получаем данные из фикстуры с продуктами
+        with open("db_blog.json", "r", encoding="windows-1251") as file:
+            return json.load(file)
+
     def handle(self, *args, **options):
 
         # Удалите все продукты
@@ -61,7 +73,7 @@ class Command(BaseCommand):
         Products.objects.bulk_create(product_for_create)
 
         # Обходим все значения категорий из фиктсуры для получения информации об одном объекте
-        for contact in Command.json_read_categories():
+        for contact in Command.json_read_contacts():
             contacts_for_create.append(
                 Contacts(pk=contact["pk"], phone_number=contact["fields"]["phone_number"],
                          name=contact["fields"]["name"],
@@ -71,12 +83,16 @@ class Command(BaseCommand):
         # Создаем объекты в базе с помощью метода bulk_create()
         Contacts.objects.bulk_create(contacts_for_create)
 
-        for contact in Command.json_read_categories():
-            contacts_for_create.append(
-                Contacts(pk=contact["pk"], phone_number=contact["fields"]["phone_number"],
-                         name=contact["fields"]["name"],
-                         message=contact["fields"]["message"])
+        for blog in Command.json_read_blogs():
+            blog_for_create.append(
+                Blog(title=blog["fields"]["title"],
+                     content=blog["fields"]["content"],
+                     slug=blog["fields"]["slug"],
+                     preview=blog["fields"]["preview"],
+                     created_at=blog["fields"]["created_at"],
+                     published=blog["fields"]["published"],
+                     view_count=blog["fields"]["view_count"])
             )
 
         # Создаем объекты в базе с помощью метода bulk_create()
-        Contacts.objects.bulk_create(contacts_for_create)
+        Blog.objects.bulk_create(blog_for_create)
