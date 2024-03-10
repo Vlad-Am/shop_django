@@ -2,7 +2,7 @@ import json
 
 from django.core.management import BaseCommand
 
-from catalog.models import Products, Categories, Blog, Contacts
+from catalog.models import Products, Categories, Blog, Contacts, Version
 
 
 class Command(BaseCommand):
@@ -31,6 +31,12 @@ class Command(BaseCommand):
         with open("db_blog.json", "r", encoding="windows-1251") as file:
             return json.load(file)
 
+    @staticmethod
+    def json_read_versions():
+        # Здесь мы получаем данные из фикстуры с продуктами
+        with open("db_versions.json", "r", encoding="windows-1251") as file:
+            return json.load(file)
+
     def handle(self, *args, **options):
 
         # Удалите все продукты
@@ -41,12 +47,15 @@ class Command(BaseCommand):
         Contacts.objects.all().delete()
         # Удалите все записи блогов
         Blog.objects.all().delete()
+        # Удалите все версии
+        Version.objects.all().delete()
 
         # Создайте списки для хранения объектов
         product_for_create = []
         category_for_create = []
         contacts_for_create = []
         blog_for_create = []
+        version_for_create =[]
 
         # Обходим все значения категорий из фиктсуры для получения информации об одном объекте
         for category in Command.json_read_categories():
@@ -96,3 +105,12 @@ class Command(BaseCommand):
 
         # Создаем объекты в базе с помощью метода bulk_create()
         Blog.objects.bulk_create(blog_for_create)
+
+        for version in Command.json_read_versions():
+            version_for_create.append(
+                Version(pk=version["pk"], product=Products.objects.get(pk=version["fields"]["product"]),
+                        number=version["fields"]["number"], working=version["fields"]["working"])
+            )
+
+        # Создаем объекты в базе с помощью метода bulk_create()
+        Version.objects.bulk_create(version_for_create)

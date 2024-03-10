@@ -1,4 +1,4 @@
-{% extends 'catalog/base.html'%}
+{% extends 'catalog/base.html' %}
 {% load share_media %}
 {% block content %}
 
@@ -8,28 +8,34 @@
 </div>
 <div class="container">
     <a href="{% url 'catalog:create_product' %}">
-            <button type="button" class="btn btn-lg mb-5 btn-block btn-outline-primary form-control">Создать продукт</button>
-        </a>
+        <button type="button" class="btn btn-lg mb-5 btn-block btn-outline-primary form-control">Создать продукт
+        </button>
+    </a>
     <div class="row text-center">
+
         {% for product in object_list %}
+
+
         <div class="col-4">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ product.name| title }}</h4>
                 </div>
-                <img src = '{{ product.preview | media_filter }}' alt="Product Image" class = 'img-fluid'>
+                <img src='{{ product.preview | media_filter }}' alt="Product Image" class='img-fluid'>
                 <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{product.price}} ₽</h1>
+                    <h1 class="card-title pricing-card-title">{{ product.price }} ₽</h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>- {{product.description}}</li>
-                        <li>- {{product.category}}</li>
-                        <li>- Доставка</li>
+                        <li>- {{ product.description }}</li>
+                        <li>- {{ product.category }}</li>
+                        <li>- Версия № {{ product.version.number | floatformat }}</li>
                         <li>- Надежный поставщик</li>
                     </ul>
                     <a href="{% url 'catalog:view_product' pk=product.pk %}">
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">Посмотреть</button>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">Посмотреть
+                        </button>
                     </a>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">В корзину</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">В корзину
+                    </button>
                 </div>
             </div>
         </div>

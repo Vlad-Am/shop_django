@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "category": "vegetables",
-      "description": "зеленые"
+      "description": "???????"
     }
   },
   {
@@ -40,81 +40,176 @@
     }
   },
   {
-    "model": "catalog.products",
-    "pk": 1,
+    "model": "catalog.categories",
+    "pk": 6,
     "fields": {
-      "name": "Яблоко",
-      "description": "Голден",
+      "category": "???????",
+      "description": "?????? ??????????"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 62,
+    "fields": {
+      "name": "??????",
+      "description": "??????",
       "preview": "",
       "category": 2,
       "price": 59,
-      "created_at": "2024-02-09T12:55:23.457Z",
-      "updated_at": "2024-02-09T12:55:23.457Z"
+      "created_at": "2024-03-07T20:19:52.666Z",
+      "updated_at": "2024-03-07T20:19:52.666Z"
     }
   },
   {
     "model": "catalog.products",
-    "pk": 2,
+    "pk": 63,
     "fields": {
-      "name": "Багет",
-      "description": "французская вытянутая болочка",
+      "name": "?????",
+      "description": "??????????? ????????? ???????",
       "preview": "",
       "category": 3,
       "price": 63,
-      "created_at": "2024-02-09T12:56:03.471Z",
-      "updated_at": "2024-02-09T12:56:03.471Z"
+      "created_at": "2024-03-07T20:19:52.666Z",
+      "updated_at": "2024-03-07T20:19:52.666Z"
     }
   },
   {
     "model": "catalog.products",
-    "pk": 3,
+    "pk": 64,
     "fields": {
-      "name": "Картофель эконом",
-      "description": "не мытый",
+      "name": "????????? ??????",
+      "description": "?? ?????",
       "preview": "",
       "category": 1,
       "price": 30,
-      "created_at": "2024-02-09T12:56:33.203Z",
-      "updated_at": "2024-02-09T12:56:33.203Z"
+      "created_at": "2024-03-07T20:19:52.666Z",
+      "updated_at": "2024-03-07T20:19:52.666Z"
     }
   },
   {
     "model": "catalog.products",
-    "pk": 4,
+    "pk": 65,
     "fields": {
-      "name": "Швабра",
-      "description": "Палка с тряпкой",
+      "name": "??????",
+      "description": "????? ? ???????",
       "preview": "",
       "category": 4,
       "price": 100,
-      "created_at": "2024-02-09T12:56:54.462Z",
-      "updated_at": "2024-02-09T12:56:54.462Z"
+      "created_at": "2024-03-07T20:19:52.666Z",
+      "updated_at": "2024-03-07T20:19:52.666Z"
     }
   },
   {
     "model": "catalog.products",
-    "pk": 5,
+    "pk": 66,
     "fields": {
-      "name": "Ведро 10л",
-      "description": "глубокое для мытья полов",
+      "name": "????? 10?",
+      "description": "???????? ??? ????? ?????",
       "preview": "",
       "category": 4,
       "price": 150,
-      "created_at": "2024-02-09T13:23:34.200Z",
-      "updated_at": "2024-02-09T13:23:34.200Z"
+      "created_at": "2024-03-07T20:19:52.666Z",
+      "updated_at": "2024-03-07T20:19:52.666Z"
     }
   },
   {
     "model": "catalog.products",
-    "pk": 6,
+    "pk": 67,
     "fields": {
-      "name": "кочерга",
-      "description": "для кочерыжек в костре",
+      "name": "???????",
+      "description": "??? ????????? ? ??????",
       "preview": "",
       "category": 4,
       "price": 150,
-      "created_at": "2024-02-09T13:24:15.480Z",
-      "updated_at": "2024-02-09T13:24:15.480Z"
+      "created_at": "2024-03-07T20:19:52.666Z",
+      "updated_at": "2024-03-07T20:19:52.666Z"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 68,
+    "fields": {
+      "name": "?????? ????????",
+      "description": "? ??????????? ????",
+      "preview": "media/catalog/776b2ed3449499992a60b957d0b1.jpg",
+      "category": 6,
+      "price": 111,
+      "created_at": "2024-03-07T20:19:52.666Z",
+      "updated_at": "2024-03-07T20:19:52.666Z"
+    }
+  },
+  {
+    "model": "catalog.contacts",
+    "pk": 1,
+    "fields": {
+      "name": "vlad",
+      "phone_number": 133113,
+      "message": "hi vlad"
+    }
+  },
+  {
+    "model": "catalog.contacts",
+    "pk": 2,
+    "fields": {
+      "name": "test",
+      "phone_number": 9838,
+      "message": "test"
+    }
+  },
+  {
+    "model": "catalog.blog",
+    "pk": 30,
+    "fields": {
+      "title": "???????",
+      "slug": "belochka",
+      "content": "????????",
+      "preview": "catalog/blog/squirrel_iK9u3dq.jpg",
+      "created_at": "2024-03-07T20:19:52.667Z",
+      "published": true,
+      "view_count": 11,
+      "price_per_one": null
+    }
+  },
+  {
+    "model": "catalog.blog",
+    "pk": 31,
+    "fields": {
+      "title": "???",
+      "slug": "pra",
+      "content": "???",
+      "preview": "",
+      "created_at": "2024-03-07T20:19:52.667Z",
+      "published": false,
+      "view_count": 0,
+      "price_per_one": null
+    }
+  },
+  {
+    "model": "catalog.blog",
+    "pk": 32,
+    "fields": {
+      "title": "????",
+      "slug": "slon",
+      "content": "???????",
+      "preview": "catalog/blog/elephant_CkjSU3d.jpeg",
+      "created_at": "2024-03-07T20:19:52.667Z",
+      "published": true,
+      "view_count": 12,
+      "price_per_one": null
+    }
+  },
+  {
+    "model": "catalog.blog",
+    "pk": 33,
+    "fields": {
+      "title": "lorem",
+      "slug": "lorem",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis metus metus. Suspendisse risus dolor, facilisis id justo sed, efficitur ultricies neque. Nam facilisis ipsum eget arcu dictum maximus. Nunc maximus blandit iaculis. Duis ultrices ligula sed tellus accumsan, eget volutpat dui volutpat. Morbi ac enim erat. Cras porta cursus justo a facilisis. Aliquam consequat vestibulum metus quis congue. Phasellus ornare ornare scelerisque. Proin tellus ipsum, mollis a nibh in, tincidunt imperdiet ex. In hac habitasse platea dictumst. Nunc sagittis ante justo, ut iaculis justo lobortis sed. In est metus, iaculis sed nunc ultrices, ornare feugiat lorem. Aenean eu pharetra ipsum, ac pharetra elit.\r\n\r\nInteger mattis mauris velit, in iaculis ante auctor quis. Donec leo ligula, dapibus a tincidunt blandit, facilisis sit amet metus. Suspendisse at efficitur justo, vitae lacinia tortor. Cras in condimentum tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec elementum sit amet turpis eu gravida. Proin non mollis leo.\r\n\r\nVestibulum sed luctus dui, vitae suscipit velit. Donec ac risus ornare, consequat tortor sed, porta risus. Morbi volutpat odio in tellus varius, a rutrum lorem rutrum. Proin laoreet erat sed leo finibus, in hendrerit leo aliquet. Duis vitae sapien in purus tincidunt mollis. Suspendisse potenti. Pellentesque porta porta elit at tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras imperdiet est justo, nec mattis nisl vulputate et. Aliquam erat volutpat. Aenean erat nisi, iaculis eget semper sed, elementum a felis. Nullam egestas tellus non nunc vehicula accumsan. Donec erat nisi, posuere eget mauris a, dictum laoreet neque. Sed pellentesque non diam quis eleifend. Suspendisse eleifend, dolor sed ullamcorper luctus, nulla odio malesuada ex, quis hendrerit ligula lectus accumsan justo.\r\n\r\nSed accumsan pharetra nisl, at cursus neque efficitur et. Donec id semper massa, non pretium metus. Proin sit amet imperdiet mi, at molestie nulla. Aliquam non nibh sem. Pellentesque consequat sapien eros, sed mattis lacus fringilla ut. Quisque pharetra imperdiet porttitor. Donec eget viverra turpis, sed suscipit elit. Quisque vehicula ac dui quis finibus. Aliquam consectetur, tellus in varius malesuada, felis dolor dictum eros, quis viverra dui eros maximus nibh. Pellentesque ac lacinia tellus, quis consequat nisl. Proin efficitur accumsan nisi a venenatis. Donec ullamcorper, libero nec commodo tristique, eros diam finibus libero, nec imperdiet magna erat quis eros. Integer vitae diam in lorem accumsan posuere. Duis ut consequat nisi. Maecenas vestibulum ipsum ut tortor tincidunt, id facilisis libero gravida. Nunc vitae ex quis justo scelerisque tincidunt non a eros.\r\n\r\nSuspendisse ac leo gravida, accumsan tortor convallis, aliquet purus. Cras auctor pharetra mauris, aliquam finibus odio pretium nec. Integer ac iaculis nibh. Cras viverra vel nulla eget interdum. Curabitur elementum lacus massa, non tempor orci luctus non. Aliquam dui dui, ultrices vel sapien eu, vestibulum cursus justo. Aliquam viverra, ligula in vehicula interdum, neque neque molestie dolor, et iaculis nisl magna non neque. Maecenas posuere, libero porta fermentum mollis, lectus metus faucibus sem, auctor euismod eros ex eget diam. Vivamus dictum, sem et ullamcorper blandit, massa arcu maximus neque, et dictum elit lacus vitae tortor. Nam id malesuada est, sed maximus lorem. Etiam eleifend nisi quis fringilla vestibulum. Praesent sem ligula, blandit sit amet laoreet ullamcorper, pretium eu erat. Nulla pulvinar bibendum semper.",
+      "preview": "catalog/blog/????_?_????????.png",
+      "created_at": "2024-03-07T20:19:52.667Z",
+      "published": true,
+      "view_count": 18,
+      "price_per_one": null
     }
   }
 ]
