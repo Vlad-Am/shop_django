@@ -10,11 +10,29 @@ class ProductListView(ListView):
     model = Products
 
     def get_context_data(self, *args, **kwargs):
-        """Получает данные о версиях продукта и выберите текущую (активную) версию для продукта"""
+        """Получает данные о версиях экземпляра класса и выбирает текущую (активную) версию для продукта"""
         context = super().get_context_data(*args, **kwargs)
+        products = self.get_queryset()
+        for product in products:
+            product.version = product.version_set.filter(working=True).first()
+        context["object_list"] = products
+
+        return context
 
 
-        return super().get_context_data(*args, **kwargs)
+class ProductDetailView(DetailView):
+    model = Products
+
+    def get_context_data(self, **kwargs):
+        """Получает данные о версиях экземпляра класса и выбирает текущую (активную) версию для продукта"""
+
+        context = super().get_context_data(**kwargs)
+
+        product = self.get_object
+        print(context)
+        context['versions'] = product.versions.all()
+        context['current_version'] = product.versions.filter(working=True).first()
+        return context
 
 
 class ProductCreateView(CreateView):
@@ -25,6 +43,16 @@ class ProductCreateView(CreateView):
     # def get_success_url(self, *args, **kwargs):
     #     super().get_success_url(*args, **kwargs)
     #     return reverse_lazy('catalog:view_product', kwargs={'pk': self.object.pk})
+
+
+class ProductsUpdateView(UpdateView):
+    model = Products
+    success_url = reverse_lazy('catalog:products_list')
+    form_class = ProductForm
+
+    def get_success_url(self, *args, **kwargs):
+        super().get_success_url()
+        return reverse_lazy('catalog:view_product', kwargs={'pk': self.object.pk})
 
 
 class ContactsCreateView(CreateView):

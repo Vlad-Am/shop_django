@@ -27,7 +27,6 @@ class Products(models.Model):
     price = models.IntegerField(verbose_name="Цена")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления", **NULLABLE)
-
     # manufactured_at = models.DateTimeField(auto_now=True, verbose_name="Дата производства", **NULLABLE)
 
     def __str__(self):
@@ -78,10 +77,10 @@ class Blog(models.Model):
 
 
 class Version(models.Model):
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, max_length=150, verbose_name="Продукт")
-    number = models.IntegerField(default=1,verbose_name="номер версии")
-    name = models.CharField(max_length=150, verbose_name="Название версии")
-    working = models.BooleanField(verbose_name="Работает", default=False)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, verbose_name="Продукт")
+    number = models.FloatField(default=1.00, verbose_name="Номер версии")
+    name = models.CharField(max_length=150, verbose_name="Название версии", **NULLABLE)
+    working = models.BooleanField(verbose_name="Работает", default=True)
 
     def __str__(self):
         return f" Версия {self.product} номер {self.number}"

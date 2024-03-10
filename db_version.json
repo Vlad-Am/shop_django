@@ -1,0 +1,122 @@
+[
+  {
+    "model": "catalog.version",
+    "pk": 12,
+    "fields": {
+      "product": 69,
+      "number": 1.0,
+      "name": "первая",
+      "working": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 13,
+    "fields": {
+      "product": 69,
+      "number": 2.0,
+      "name": "новая",
+      "working": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 14,
+    "fields": {
+      "product": 71,
+      "number": 1.0,
+      "name": "первая",
+      "working": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 15,
+    "fields": {
+      "product": 71,
+      "number": 2.0,
+      "name": "вторая новая",
+      "working": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 16,
+    "fields": {
+      "product": 69,
+      "number": 2.1,
+      "name": "second new",
+      "working": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 17,
+    "fields": {
+      "product": 70,
+      "number": 1.0,
+      "name": null,
+      "working": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 18,
+    "fields": {
+      "product": 72,
+      "number": 1.0,
+      "name": null,
+      "working": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 19,
+    "fields": {
+      "product": 75,
+      "number": 1.0,
+      "name": null,
+      "working": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 20,
+    "fields": {
+      "product": 73,
+      "number": 1.0,
+      "name": null,
+      "working": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 21,
+    "fields": {
+      "product": 74,
+      "number": 1.0,
+      "name": null,
+      "working": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 22,
+    "fields": {
+      "product": 76,
+      "number": 1.0,
+      "name": null,
+      "working": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 23,
+    "fields": {
+      "product": 76,
+      "number": 2.0,
+      "name": null,
+      "working": true
+    }
+  }
+]
