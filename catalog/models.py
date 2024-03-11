@@ -40,7 +40,7 @@ class Products(models.Model):
 
 class Contacts(models.Model):
     name = models.CharField(max_length=100, verbose_name="Наименование")
-    phone_number = models.IntegerField(verbose_name="Телефон")
+    phone_number = models.CharField(verbose_name="Телефон")
     message = models.TextField(verbose_name="Сообщение", **NULLABLE)
 
     def __str__(self):
@@ -78,9 +78,9 @@ class Blog(models.Model):
 
 class Version(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE, verbose_name="Продукт")
-    number = models.FloatField(default=1.00, verbose_name="Номер версии")
+    number = models.FloatField(verbose_name="Номер версии")
     name = models.CharField(max_length=150, verbose_name="Название версии", **NULLABLE)
-    working = models.BooleanField(verbose_name="Работает", default=True)
+    working = models.BooleanField(verbose_name="Работает")
 
     def __str__(self):
         return f" Версия {self.product} номер {self.number}"

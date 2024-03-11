@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Products
+from catalog.models import Products, Version, Contacts
 
 
 class ProductForm(forms.ModelForm):
@@ -32,3 +32,26 @@ class ProductForm(forms.ModelForm):
         return cleaned_data
 
 
+class VersionForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if isinstance(field, forms.BooleanField):
+                field.widget.attrs['class'] = 'form-check-input'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Version
+        fields = '__all__'
+
+
+class ContactsForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Contacts
+        fields = '__all__'

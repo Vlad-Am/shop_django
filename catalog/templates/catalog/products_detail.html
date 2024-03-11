@@ -18,7 +18,7 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>- {{ object.description }}</li>
                         <li>- {{ object.price}} Руб.</li>
-                        <li>- Версия № {{ object.version.number | floatformat }}</li>
+                        <li>- Версия № {{ object.current_version | floatformat }}</li>
                         <li> {{ object.version.working }}</li>
                     </ul>
                     <div class="card-footer">
