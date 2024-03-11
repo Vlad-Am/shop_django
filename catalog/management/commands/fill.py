@@ -55,7 +55,7 @@ class Command(BaseCommand):
         category_for_create = []
         contacts_for_create = []
         blog_for_create = []
-        version_for_create =[]
+        # version_for_create = []
 
         # Обходим все значения категорий из фиктсуры для получения информации об одном объекте
         for category in Command.json_read_categories():
@@ -106,11 +106,11 @@ class Command(BaseCommand):
         # Создаем объекты в базе с помощью метода bulk_create()
         Blog.objects.bulk_create(blog_for_create)
 
-        for version in Command.json_read_versions():
-            version_for_create.append(
-                Version(pk=version["pk"], product=Products.objects.get(pk=version["fields"]["product"]),
-                        number=version["fields"]["number"], working=version["fields"]["working"])
-            )
-
-        # Создаем объекты в базе с помощью метода bulk_create()
-        Version.objects.bulk_create(version_for_create)
+        # for version in Command.json_read_versions():
+        #     version_for_create.append(
+        #         Version(pk=version["pk"], product=Products.objects.get(pk=version["fields"]["product"]),
+        #                 number=version["fields"]["number"], working=version["fields"]["working"])
+        #     )
+        #
+        # # Создаем объекты в базе с помощью метода bulk_create()
+        # Version.objects.bulk_create(version_for_create)

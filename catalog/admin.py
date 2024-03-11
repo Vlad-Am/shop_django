@@ -40,4 +40,3 @@ class VersionAdmin(admin.ModelAdmin):
     list_display = ("product", "number", "name", "working")
     list_filter = ("product", "number",)
     search_fields = ("product", "number", "name", "working")
-

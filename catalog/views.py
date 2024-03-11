@@ -1,12 +1,13 @@
+from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from pytils.translit import slugify
 
-from catalog.forms import ProductForm
-from catalog.models import Products, Contacts, Blog
+from catalog.forms import ProductForm, ContactsForm, VersionForm
+from catalog.models import Products, Contacts, Blog, Version
 
 
-class ProductListView(ListView):
+class ProductsListView(ListView):
     model = Products
 
     def get_context_data(self, *args, **kwargs):
@@ -20,22 +21,22 @@ class ProductListView(ListView):
         return context
 
 
-class ProductDetailView(DetailView):
+class ProductsDetailView(DetailView):
     model = Products
 
-    def get_context_data(self, **kwargs):
-        """Получает данные о версиях экземпляра класса и выбирает текущую (активную) версию для продукта"""
+    # def get_context_data(self, **kwargs):
+    #     """Получает данные о версиях экземпляра класса и выбирает текущую (активную) версию для продукта"""
 
-        context = super().get_context_data(**kwargs)
+    # context = super().get_context_data(**kwargs)
+    #
+    # product = self.get_object
+    # print(product)
+    # context['version'] = product.version.all()
+    # context['current_version'] = product.version.filter(working=True).first()
+    # return context
 
-        product = self.get_object
-        print(context)
-        context['versions'] = product.versions.all()
-        context['current_version'] = product.versions.filter(working=True).first()
-        return context
 
-
-class ProductCreateView(CreateView):
+class ProductsCreateView(CreateView):
     model = Products
     success_url = reverse_lazy('catalog:products_list')
     form_class = ProductForm
@@ -54,11 +55,29 @@ class ProductsUpdateView(UpdateView):
         super().get_success_url()
         return reverse_lazy('catalog:view_product', kwargs={'pk': self.object.pk})
 
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data()
+        subject_formset = inlineformset_factory(Products, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = subject_formset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = subject_formset(instance=self.object)
+        return context_data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        subject_formset = context['formset']
+        self.object = form.save()
+        if subject_formset.is_valid():
+            subject_formset.instance = self.object
+            subject_formset.save()
+        return super().form_valid(form)
+
 
 class ContactsCreateView(CreateView):
     model = Contacts
-    fields = ("name", "phone_number", "message")
     success_url = reverse_lazy('catalog:contacts')
+    form_class = ContactsForm
     #     name = request.POST.get('name')
     #     phone = request.POST.get('phone')
     #     message = request.POST.get('message')
@@ -66,15 +85,11 @@ class ContactsCreateView(CreateView):
     # return render(request, 'catalog/contacts.html')
 
 
-class ProductsDetailView(DetailView):
-    model = Products
-
-
 class BlogListView(ListView):
     model = Blog
 
     def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
+        queryset = super().get_queryset()
         queryset = queryset.filter(published=True)
         return queryset
 
@@ -128,7 +143,7 @@ class BlogUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self, *args, **kwargs):
-        super().get_success_url(*args, **kwargs)
+        super().get_success_url()
         return reverse_lazy('catalog:view_blog', kwargs={'the_slug': self.object.slug})
 
 
