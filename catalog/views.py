@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -36,17 +37,19 @@ class ProductsDetailView(DetailView):
     # return context
 
 
-class ProductsCreateView(CreateView):
+class ProductsCreateView(LoginRequiredMixin, CreateView):
     model = Products
     success_url = reverse_lazy('catalog:products_list')
     form_class = ProductForm
 
-    # def get_success_url(self, *args, **kwargs):
-    #     super().get_success_url(*args, **kwargs)
-    #     return reverse_lazy('catalog:view_product', kwargs={'pk': self.object.pk})
+    def from_valid(self, form):
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
-class ProductsUpdateView(UpdateView):
+class ProductsUpdateView(LoginRequiredMixin, UpdateView):
     model = Products
     success_url = reverse_lazy('catalog:products_list')
     form_class = ProductForm
@@ -71,6 +74,11 @@ class ProductsUpdateView(UpdateView):
         if subject_formset.is_valid():
             subject_formset.instance = self.object
             subject_formset.save()
+        # попытка сделать возможность редактирования только у авторизированных пользователей
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+
         return super().form_valid(form)
 
 

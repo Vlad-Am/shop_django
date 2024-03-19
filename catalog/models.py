@@ -1,6 +1,8 @@
 from django.db import models
 from pytils.translit import slugify
 
+from auth_app.models import User
+
 # Create your models here.
 
 NULLABLE = {"blank": True, "null": True}
@@ -27,7 +29,7 @@ class Products(models.Model):
     price = models.IntegerField(verbose_name="Цена")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления", **NULLABLE)
-    # manufactured_at = models.DateTimeField(auto_now=True, verbose_name="Дата производства", **NULLABLE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец", **NULLABLE)
 
     def __str__(self):
         return f"{self.name} цена: {self.price}, категория: {self.category}"
