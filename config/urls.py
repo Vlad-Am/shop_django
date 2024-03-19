@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.conf.urls.static import static
 
+from auth_app.views import confirm_email
+
 """
 URL configuration for config project.
 
@@ -22,5 +24,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("catalog.urls"), name='catalog')
+    path('', include("catalog.urls"), name='catalog'),
+    path('auth/', include("auth_app.urls"), name='auth'),
+    path('auth/activate/<str:token>/', confirm_email, name='email_verification'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

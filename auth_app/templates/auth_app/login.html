@@ -1,0 +1,29 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+
+    <h1 class="display-4">
+        Авторизация
+    </h1>
+</div>
+<form class="row g-3" method="post" enctype="multipart/form-data">
+    <div class='col-6'>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="card-title">
+                    Вход
+                </h4>
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
+                    Войти
+                </button>
+            </div>
+            <a href="{% url 'auth_app:reset_password' %}">Забыли пароль? </a>
+        </div>
+    </div>
+</form>
+{% endblock %}
