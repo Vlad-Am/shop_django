@@ -22,7 +22,7 @@ class ProductsListView(ListView):
         return context
 
 
-class ProductsDetailView(DetailView):
+class ProductsDetailView(LoginRequiredMixin, DetailView):
     model = Products
 
     # def get_context_data(self, **kwargs):
@@ -35,6 +35,11 @@ class ProductsDetailView(DetailView):
     # context['version'] = product.version.all()
     # context['current_version'] = product.version.filter(working=True).first()
     # return context
+
+
+class ProductsDeleteView(DeleteView):
+    model = Products
+    success_url = reverse_lazy('catalog:products_list')
 
 
 class ProductsCreateView(LoginRequiredMixin, CreateView):

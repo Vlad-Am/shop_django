@@ -5,55 +5,25 @@ from django.core.management import BaseCommand
 from catalog.models import Products, Categories, Blog, Contacts, Version
 
 
-def json_read_categories():
-    """Здесь мы получаем данные из фикстуры с категориями"""
-    with open("db_categories.json", "r", encoding="windows-1251") as file:
-        return json.load(file)
-
-
 class Command(BaseCommand):
 
     @staticmethod
     def json_read_db():
-        with open("db_version.json", "r", encoding="windows-1251") as file:
-            return json.load(file)
-
-    @staticmethod
-    def json_read_products():
-        # Здесь мы получаем данные из фикстуры с продуктами
-        with open("db_products.json", "r", encoding="windows-1251") as file:
-            return json.load(file)
-
-    @staticmethod
-    def json_read_contacts():
-        # Здесь мы получаем данные из фикстуры с продуктами
-        with open("db_contacts.json", "r", encoding="windows-1251") as file:
-            return json.load(file)
-
-    @staticmethod
-    def json_read_blogs():
-        # Здесь мы получаем данные из фикстуры с продуктами
-        with open("db_blog.json", "r", encoding="windows-1251") as file:
-            return json.load(file)
-
-    @staticmethod
-    def json_read_versions():
-        # Здесь мы получаем данные из фикстуры с продуктами
-        with open("db_version.json", "r", encoding="windows-1251") as file:
+        with open("db/database.json", "r", encoding="utf-8") as file:
             return json.load(file)
 
     def handle(self, *args, **options):
         # Тут, единственное, что не нашел как именно через пайчарм обнулить счетчик pk
         # Удаление всех продуктов
-        # Products.objects.all().delete()
+        Products.objects.all().delete()
         # # Удаление всех категорий
-        # Categories.objects.all().delete()
+        Categories.objects.all().delete()
         # # Удаление всех контактов
-        # Contacts.objects.all().delete()
+        Contacts.objects.all().delete()
         # # Удаление всех записи блогов
-        # Blog.objects.all().delete()
+        Blog.objects.all().delete()
         # # Удаление всех версии
-        # Version.objects.all().delete()
+        Version.objects.all().delete()
 
         # Создайте списки для хранения объектов.
         # Обходим все значения категорий из фиктсуры для получения информации об одном объекте
@@ -61,7 +31,7 @@ class Command(BaseCommand):
         # Создаем объекты в базе с помощью метода bulk_create()
         Categories.objects.bulk_create(
             [
-                Categories(category=category["fields"]["category"],
+                Categories(pk=category['pk'], category=category["fields"]["category"],
                            description=category["fields"]["description"])
 
                 for category in Command.json_read_db() if category['model'] == 'catalog.categories'
@@ -71,7 +41,8 @@ class Command(BaseCommand):
         # Создаем объекты в базе с помощью метода bulk_create()
         Products.objects.bulk_create(
             [
-                Products(name=product["fields"]["name"], description=product["fields"]["description"],
+                Products(pk= product['pk'], name=product["fields"]["name"],
+                         description=product["fields"]["description"],
                          preview=product["fields"]["preview"],
                          category=Categories.objects.get(pk=product["fields"]["category"]),
                          price=product["fields"]["price"], created_at=product["fields"]["created_at"],
@@ -109,11 +80,11 @@ class Command(BaseCommand):
         )
 
         # Создаем объекты в базе с помощью метода bulk_create()
-        # Version.objects.bulk_create(
-        #     [
-        #         Version(product=Products.objects.get(pk=version["fields"]["product"]),
-        #                 number=version["fields"]["number"], working=version["fields"]["working"])
-        #
-        #         for version in Command.json_read_db() if version['model'] == 'catalog.version'
-        #     ]
-        # )
+        Version.objects.bulk_create(
+            [
+                Version(product=Products.objects.get(pk=version["fields"]["product"]),
+                        number=version["fields"]["number"], working=version["fields"]["working"])
+
+                for version in Command.json_read_db() if version['model'] == 'catalog.version'
+            ]
+        )

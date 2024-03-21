@@ -7,9 +7,11 @@
     <p class="lead">Skystore - это отличный магазин продуктов по самым низким ценам</p>
 </div>
 <div class="container">
+    {% if user.is_authenticated %}
     <a href="{% url 'catalog:create_product' %}">
         <button type="button" class="btn btn-lg mb-5 btn-block btn-outline-primary form-control">Создать продукт
         </button>
+        {% endif %}
     </a>
     <div class="row text-center">
 
@@ -30,12 +32,14 @@
                         <li>- Версия № {{ product.version.number | floatformat }}</li>
                         <li>- Надежный поставщик</li>
                     </ul>
+                    {% if user.is_authenticated %}
                     <a href="{% url 'catalog:view_product' pk=product.pk %}">
                         <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">Посмотреть
                         </button>
                     </a>
                     <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">В корзину
                     </button>
+                    {% endif %}
                 </div>
             </div>
         </div>
