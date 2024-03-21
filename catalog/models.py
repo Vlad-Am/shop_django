@@ -1,7 +1,7 @@
 from django.db import models
 from pytils.translit import slugify
 
-from auth_app.models import User
+from users.models import User
 
 # Create your models here.
 
