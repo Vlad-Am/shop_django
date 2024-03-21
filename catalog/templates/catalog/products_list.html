@@ -32,7 +32,7 @@
                         <li>- Версия № {{ product.version.number | floatformat }}</li>
                         <li>- Надежный поставщик</li>
                     </ul>
-                    {% if user.is_authenticated%}
+                    {% if user.is_authenticated %}
                     <a href="{% url 'catalog:view_product' pk=product.pk %}">
                         <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">Посмотреть
                         </button>
