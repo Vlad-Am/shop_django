@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
+from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from pytils.translit import slugify
 
-from catalog.forms import ProductForm, ContactsForm, VersionForm
+from catalog.forms import ProductForm, ContactsForm, VersionForm, ProductModeratorForm
 from catalog.models import Products, Contacts, Blog, Version
 
 
@@ -85,6 +86,17 @@ class ProductsUpdateView(LoginRequiredMixin, UpdateView):
         self.object.save()
 
         return super().form_valid(form)
+
+    def get_form_class(self):
+        """Переопределение метода выбора формы для редактирования"""
+
+        user = self.request.user
+        perms = ("products.change_published", "products.change_description", "products.change_category")
+        if user.has_perms(perms):
+            return ProductModeratorForm
+        if user == self.object.owner:
+            return ProductForm
+        raise HttpResponseForbidden
 
 
 class ContactsCreateView(CreateView):
