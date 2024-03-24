@@ -23,11 +23,22 @@
                     </ul>
                     <div class="card-footer">
                         Последние обновление: {{object.updated_at |date:"d.m.Y в H:i"}}
+                        {% if user.is_authenticated %}
+                        {% if perms.products.change_published and perms.products.change_description and perms.products.change_category %}
+
                         <a href="{% url 'catalog:update_product' products.pk %}">
                             <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">
                                 Изменить
                             </button>
                         </a>
+                        {% elif user == object.owner%}
+                        <a href="{% url 'catalog:update_product' products.pk %}">
+                            <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">
+                                Изменить
+                            </button>
+                        </a>
+                        {% endif %}
+                        {% endif %}
                         <a href="{% url 'catalog:product_confirm_delete' products.pk %}">
                             <button type="button" class="btn btn-lg btn-block btn-outline-primary form-control">
                                 Удалить

@@ -30,6 +30,7 @@ class Products(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления", **NULLABLE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец", **NULLABLE)
+    is_published = models.BooleanField(default=False, verbose_name="Опубликовано")
 
     def __str__(self):
         return f"{self.name} цена: {self.price}, категория: {self.category}"
@@ -38,6 +39,12 @@ class Products(models.Model):
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
         ordering = ("price",)
+
+        permissions = [
+            ("change_published", "отменять публикацию продукта",),
+            ("change_description", "может менять описание любого продукта",),
+            ("change_category", "может менять категорию любого продукта",)
+        ]
 
 
 class Contacts(models.Model):
